@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment files
+.env
+.env.*    # optional, to catch things like .env.local or .env.development
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE-specific
+.vscode/
+.idea/
+
+# Output from testing
+coverage/
+
+# Local environment overrides
+*.local
+
+# Render cache / output (if any)
+render.yaml.local
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# System files
+*.swp
+
+# Optional: React/Vite specific
+*.cache/
+*.parcel-cache/
+vite.svg
