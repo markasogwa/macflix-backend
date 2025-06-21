@@ -8,6 +8,7 @@ import {
   getPopularMoviesHandler,
   searchMovieHandler,
 } from "../controllers/movieController.js";
+import { getMovieTrailer } from "../controllers/movieTrailerController.js";
 import { protect } from "../middlewares/auth.js";
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.post("/watchlist", protect, addMoviesToWatchlist);
 router.get("/search", searchMovieHandler);
 router.get("/genres", getGenres);
 router.get("/:id", getMovieDetailsHandler);
+router.get("/:id/trailer", getMovieTrailer);
 router.get("/:id/credits", getMovieCreditsHandler);
 router.get("/:id/recommendations", getMovieRecommendationsHandler);
 
