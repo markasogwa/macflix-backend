@@ -6,6 +6,45 @@ const tmdbApi = axios.create({
   params: { api_key: TMDB_API_KEY },
 });
 
+// Function to get now playing movies
+export async function getNowPlayingMoviesFromTmdb(page = 1) {
+  try {
+    const response = await tmdbApi.get("/movie/now_playing", {
+      params: { page, region: "NG" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching now playing movies:", error);
+    throw error;
+  }
+}
+
+// Function to get top rated movies
+export async function getTopRatedMoviesFromTmdb(page = 1) {
+  try {
+    const response = await tmdbApi.get("/movie/top_rated", {
+      params: { page },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching top rated movies:", error);
+    throw error;
+  }
+}
+
+// Function to get upcoming movies
+export async function getUpcomingMoviesFromTmdb(page = 1) {
+  try {
+    const response = await tmdbApi.get("/movie/upcoming", {
+      params: { page },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching upcoming movies:", error);
+    throw error;
+  }
+}
+
 // Function to get popular movies from TMDB
 export async function getPopularMoviesFromTmdb(page = 1) {
   try {
