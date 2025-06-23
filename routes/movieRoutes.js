@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  filterMoviesHandler,
   getGenres,
   getMovieCreditsHandler,
   getMovieDetailsHandler,
@@ -19,6 +20,7 @@ router.get("/top_rated", getTopRatedMoviesHandler);
 router.get("/upcoming", getUpcomingMoviesHandler);
 router.get("/popular", getPopularMoviesHandler);
 router.get("/search", searchMovieHandler);
+router.get("/filter", filterMoviesHandler);
 router.get("/genres", getGenres);
 
 // More specific dynamic routes first:

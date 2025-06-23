@@ -138,6 +138,42 @@ export const searchMovieHandler = async (req, res) => {
   }
 };
 
+// function to filter movie by rate, year and popularity
+export const filterMoviesHandler = async (req, res) => {
+  const {
+    genre = "",
+    year = "",
+    minRating = "",
+    sortBy = "popularity.desc",
+    page = "1",
+  } = req.query;
+  const pageNum = parseInt(page);
+
+  if (page && (isNaN(pageNum) || pageNum < 1)) {
+    return res.status(400).json({ error: "Invalid page number" });
+  }
+
+  if (minRating && isNaN(parseFloat(minRating))) {
+    return res.status(400).json({ error: "Invalid minRating" });
+  }
+
+  try {
+    const data = await tmdbService.filterMovies({
+      genre,
+      year,
+      minRating,
+      sortBy,
+      page: pageNum,
+    });
+    return res.status(200).json(data);
+  } catch (error) {
+    console.error("Error filtering movies:", error);
+    return res
+      .status(500)
+      .json({ message: error.message || "Internal Server Error" });
+  }
+};
+
 // fetch genres
 export const getGenres = async (req, res) => {
   try {

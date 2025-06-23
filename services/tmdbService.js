@@ -146,6 +146,41 @@ export const searchMovies = async ({ title, genre, year, page = 1 }) => {
   }
 };
 
+// filter services
+export async function filterMovies({
+  genre = "",
+  year = "",
+  minRating = "",
+  sortBy = "popularity.desc",
+  page = 1,
+}) {
+  try {
+    const params = {
+      page,
+      sort_by: sortBy,
+      with_genres: genre || undefined,
+      primary_release_year: year || undefined,
+      "vote_average.gte": minRating || undefined,
+      include_adult: false,
+    };
+
+    // Remove undefined keys so TMDb API doesn't get confused
+    Object.keys(params).forEach(
+      (key) => params[key] === undefined && delete params[key]
+    );
+
+    const response = await tmdbApi.get("/discover/movie", { params });
+
+    return {
+      results: response.data.results,
+      total_pages: response.data.total_pages,
+    };
+  } catch (error) {
+    console.error("TMDB Filter Movies Error:", error);
+    throw new Error("Failed to fetch filtered movies from TMDB.");
+  }
+}
+
 // fetch genres endpoint
 export const fetchGenres = async () => {
   const response = await tmdbApi.get(`${TMDB_BASE_URL}/genre/movie/list`, {
