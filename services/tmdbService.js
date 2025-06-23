@@ -10,7 +10,7 @@ const tmdbApi = axios.create({
 export async function getNowPlayingMoviesFromTmdb(page = 1) {
   try {
     const response = await tmdbApi.get("/movie/now_playing", {
-      params: { page, region: "NG" },
+      params: { page },
     });
     return response.data;
   } catch (error) {
